@@ -69,27 +69,19 @@ function display(param2) {
   // edit functionality
   editbtn.addEventListener("click", function editinfo(event) {
     event.preventDefault();
-    document.getElementById("amount").value = param2.amount;
+
+    document.getElementById("amount").value = param2.amount; // fetching the values which we typed
     document.getElementById("category").value = param2.category;
     document.getElementById("description").value = param2.description;
 
-    submitbtn.addEventListener("click", function putinfo(event) {
-      event.preventDefault();
-      const amount = document.getElementById("amount").value; // fetching the values which we typed
-      const category = document.getElementById("category").value;
-      const description = document.getElementById("description").value;
-    
-      let obj = {
-        amount: amount,
-        category: category,
-        description: description,
-      };
-      axios.put(`https://crudcrud.com/api/15f5e28878e444c5a4153cd00b6de942/pratik${param2._id}`,obj).then((responce)=>{
-        mainlist.removeChild(editbtn.parentElement);
-      }).catch((err)=>{
+    axios
+    .delete(
+      `https://crudcrud.com/api/15f5e28878e444c5a4153cd00b6de942/pratik/${param2._id}`
+    ).then((response)=>{
+        mainlist.removeChild(deletebtn.parentElement);
+    }).catch((err)=>{
         console.log(err);
-      })
-    });
+    })
   });
 }
 
