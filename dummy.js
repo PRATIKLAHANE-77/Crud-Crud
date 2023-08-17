@@ -21,7 +21,7 @@ function process(event) {
 function postdata(param) {
   axios
     .post(
-      "https://crudcrud.com/api/a562b54599964a5a99cc74572543ce2c/project",
+      "https://crudcrud.com/api/6164051be0044a74937ddeb39c4fdf03/pratik",
       param
     )
     .then((response) => {
@@ -32,9 +32,34 @@ function postdata(param) {
     });
 }
 
+function display(param2) {
+  const text = `<li id = 'newli'>${JSON.stringify(
+    param2
+  )}<button id = 'delete-btn' >Delete</button></li>`;
+  const div = document.getElementById("div-id");
+  // div.innerHTML = div.innerHTML + JSON.stringify(text);
+  div.appendChild(text);
+  const deletebtn = document.getElementById("delete-btn");
+  deletebtn.addEventListener("click", function deleteInfo(event) {
+    event.preventDefault();
+    li.removeChild(deletebtn.parentElement);
+    document.getElementById("newli").removeChild(deletebtn.parentElement);
+    axios
+      .delete(
+        `https://crudcrud.com/api/6164051be0044a74937ddeb39c4fdf03/pratik${param2._id}`
+      )
+      .then((response) => {
+        // li.removeChild(deletebtn.parentElement);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   axios
-    .get("https://crudcrud.com/api/a562b54599964a5a99cc74572543ce2c/project")
+    .get("https://crudcrud.com/api/6164051be0044a74937ddeb39c4fdf03/pratik")
     .then((response) => {
       display(response.data);
     })
@@ -42,9 +67,3 @@ window.addEventListener("DOMContentLoaded", () => {
       display(err);
     });
 });
-
-function display(param2) {
-  document.getElementById("div-id").innerHTML =
-    document.getElementById("div-id").innerHTML + JSON.stringify(param2); // displaying the data   // mian correct code
-
-}
